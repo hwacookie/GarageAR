@@ -26,7 +26,7 @@ public class AppTest {
     get("/")
         .then()
         .assertThat()
-        .body(equalTo("Hello World!"))
+        .body(equalTo("Hello du World!"))
         .statusCode(200)
         .contentType("text/html;charset=UTF-8");
   }

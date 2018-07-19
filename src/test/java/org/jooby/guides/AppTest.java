@@ -9,6 +9,8 @@ import org.jooby.test.MockRouter;
 import org.junit.ClassRule;
 import org.junit.Test;
 
+import io.restassured.RestAssured;
+
 /**
  * @author jooby generator
  */
@@ -23,6 +25,7 @@ public class AppTest {
 
   @Test
   public void integrationTest() {
+    RestAssured.port = 9090;
     get("/")
         .then()
         .assertThat()
@@ -33,6 +36,7 @@ public class AppTest {
 
   @Test
   public void unitTest() throws Throwable {
+	    RestAssured.port = 9090;
     String result = new MockRouter(new App())
         .get("/");
 

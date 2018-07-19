@@ -1,0 +1,99 @@
+swagger: '2.0'
+info:
+  version: '0.1'
+  title: 'Garage AR'
+  description: 'Webservice for registering to Garage AR'
+ 
+paths:
+  /validUntil:
+    get:
+      tags:
+        - users
+      summary: Returns detailed license information
+      operationId: validUntil
+      description: |
+        Checks how long a given license, identified by its ID, is still valid.
+        
+      produces:
+      - application/json
+      parameters:
+      - name: licenseID
+        in: query
+        description: the ID of the license
+        required: true
+        type: string
+
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/LicenseData'
+        400:
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/Error'
+          
+  /register:
+    post:
+      tags: 
+        - users
+      summary: Registers a new user
+      operationId: register
+      description: 
+        Register a new user by obtaining a new license. 
+      parameters: 
+      - name: email
+        in: query
+        description: the users email address
+        required: true
+        type: string
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/LicenseData'
+        400:
+          description: Invalid ID supplied
+          schema:
+            $ref: '#/definitions/Error'
+
+definitions:
+
+  LicenseData:
+    type: object
+    required:
+      - id
+      - email
+      - validUntil
+    properties:
+      id:
+        type: string
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      email:
+        type: string
+        example: Some.One@somewhere.org
+      validUntil:
+        type: string
+        format: int32
+        example: '2016-08-29T09:12:33.001Z'
+        
+  Error:
+    type: object
+    required:
+      - errNumber
+      - errText
+    properties:
+      errNumber:
+        type: integer
+        example: 4711
+      errText:
+        type: string
+        example: Invalid license ID
+        
+
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /hwacookie/GarageAR2/0.1
+schemes:
+ - https

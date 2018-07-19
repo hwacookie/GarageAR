@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class License {
 
-	public UUID lice nseID;
+	public UUID licenseID;
 	public String eMail;
 	public Date validUntil;
 
